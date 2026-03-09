@@ -21,11 +21,23 @@ button {
     cursor: pointer;
 }
 
-#result {
+#resultContainer {
     margin-top: 20px;
-    padding: 10px;
     border: 1px solid #ccc;
+}
+
+#resultHeader {
+    display: flex;
+    justify-content: flex-end;
+    background: #f3f3f3;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+#result {
+    padding: 10px;
     white-space: pre-wrap;
+    word-break: break-word;
 }
 </style>
 </head>
@@ -37,7 +49,12 @@ button {
 <br>
 <button onclick="transformText()">Transformer</button>
 
-<div id="result"></div>
+<div id="resultContainer">
+    <div id="resultHeader">
+        <button onclick="copyResult()">Copier</button>
+    </div>
+    <div id="result"></div>
+</div>
 
 <script>
 function transformText() {
@@ -50,6 +67,11 @@ function transformText() {
     let formatted = text.match(/.{1,2}/g)?.join(" ") || "";
 
     document.getElementById("result").textContent = formatted;
+}
+
+function copyResult() {
+    const text = document.getElementById("result").textContent;
+    navigator.clipboard.writeText(text);
 }
 </script>
 
